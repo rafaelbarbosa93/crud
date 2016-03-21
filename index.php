@@ -23,6 +23,12 @@
 	}
 
 	if(isset($_POST['atualizar'])){
+		$user = new app\models\UserModel();
+		$user->update($_POST['id'],[
+				'nome' => $_POST['nome'],
+				'idade' => $_POST['idade'],
+				'sexo' => $_POST['sexo']
+			]);
 	
 	}
 

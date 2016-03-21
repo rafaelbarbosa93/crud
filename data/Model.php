@@ -29,9 +29,11 @@ class Model implements Imodel{
 
 		$query = "insert into $this->table ($fields) values ($values);";
 		$pdo = $this->database->prepare($query);
-
+		print_r($fields);
+		print_r($query);
 		$bindParameters = $attributesCreate->bindCreateParameters($attributes);
-
+		print_r($bindParameters);
+		die;
 		try {
 			$pdo->execute($bindParameters);
 
@@ -57,7 +59,27 @@ class Model implements Imodel{
 
 
 	public function update($id, $attributes){
-		echo 'create';
+		$attributesUpdate = new AttributesUpdate;
+
+		$fields = $attributesUpdate->updateFields($attributes);
+
+		$query = "update $this->table set $fields where id = :id";
+
+		$pdo = $this->database->prepare($query);
+
+		$bindUpdateParameters = $attributesUpdate->bindUpdateParameters($attributes);
+
+		$bindUpdateParameters['id'] = $id;
+
+		try {
+			
+			$pdo->execute($bindUpdateParameters);
+			header("location: /crud");
+
+		} catch (PDOException $e) {
+
+			echo $e->getMessage();
+		}
 	}
 
 
@@ -78,6 +100,20 @@ class Model implements Imodel{
 
 
 	public function findBy($field, $value){
-		echo 'create';
+		$query = "select * from $this->table where $field = :value";
+
+		$pdo = $this->database->prepare($query);
+
+		try {
+			
+			$pdo->bindParam(":value",$value);
+			$pdo->execute();
+
+			return $pdo->fetch();
+
+
+		} catch (PDOException $e) {
+			dump($e->getMessage());
+		}
 	}
 }

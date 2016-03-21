@@ -1,5 +1,4 @@
-
-<span class="glyphicon glyphicon-search"></span><h2>Cadastrar User</h2>
+<h2>Cadastrar User</h2>
 
 <form method="post">
 
@@ -43,8 +42,8 @@
 			<td><?php echo $user->nome; ?></td>
 			<td><?php echo $user->idade; ?></td>
 			<td><?php echo $user->sexo; ?></td>
+			<td><a class="btn btn-default" href="?page=editar&editar=true&id=<?php echo $user->id; ?>"/>Editar</td>
 			<td><a class="btn btn-default" href="?excluir=true&id=<?php echo $user->id; ?>"/>Excluir</td>
-			<td><a class="btn btn-default" href="?editar=true&id=<?php echo $user->id; ?>"/>Editar</td>
 		</tr>
 		<?php 	
 			endforeach;

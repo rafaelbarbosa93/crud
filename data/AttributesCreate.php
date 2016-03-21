@@ -16,7 +16,7 @@ class AttributesCreate{
 	public function bindCreateParameters($attributes){
 		$values = $this->createValues($attributes);
 		$bindParameters = array_combine(explode(',', $values), array_values($attributes));
-
+		
 		return $bindParameters;
 	}
 }
